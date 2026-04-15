@@ -7,7 +7,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "kcb-app": {
+    "kcb-angular-test": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -61,10 +61,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "kcb-app:build:production"
+              "buildTarget": "kcb-angular-test:build:production"
             },
             "development": {
-              "buildTarget": "kcb-app:build:development"
+              "buildTarget": "kcb-angular-test:build:development"
             }
           },
           "defaultConfiguration": "development"

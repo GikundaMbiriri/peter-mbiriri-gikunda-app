@@ -4,10 +4,11 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuthRequest, AuthResponse } from '../models/auth.model';
+import { environment } from '../../environments/environment';
 
-const TOKEN_KEY = 'kcb_token';
-const REFRESH_TOKEN_KEY = 'kcb_refresh_token';
-const USER_KEY = 'kcb_user';
+const TOKEN_KEY = environment.tokenKey;
+const REFRESH_TOKEN_KEY = environment.refreshTokenKey;
+const USER_KEY = environment.userKey;
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
