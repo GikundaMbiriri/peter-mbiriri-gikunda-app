@@ -21,8 +21,8 @@ A front-end user management application built with Angular 21, Tailwind CSS v4, 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/<your-username>/kcb-angular-test.git
-cd kcb-angular-test
+git clone https://github.com/GikundaMbiriri/peter-mbiriri-gikunda-app.git
+cd peter-mbiriri-gikunda-app
 ```
 
 ### 2. Install dependencies
