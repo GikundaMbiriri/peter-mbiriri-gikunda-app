@@ -1,0 +1,211 @@
+<!-- Overlay -->
+<div
+  class="fixed inset-0 z-50 flex items-center justify-center p-4"
+  role="dialog"
+  aria-modal="true"
+>
+  <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" (click)="onCancel()"></div>
+
+  <!-- Modal -->
+  <div
+    class="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl overflow-hidden animate-modal-in"
+  >
+    <!-- Header -->
+    <div class="bg-kcb-navy px-6 py-5 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-kcb-green/20 flex items-center justify-center">
+          <svg
+            class="w-5 h-5 text-kcb-green"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            @if (isEdit) {
+              <path
+                d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"
+              />
+            } @else {
+              <path
+                d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8zM19 8v6M22 11h-6"
+              />
+            }
+          </svg>
+        </div>
+        <h2 class="text-white font-bold text-lg">{{ isEdit ? 'Edit User' : 'Create New User' }}</h2>
+      </div>
+      <button (click)="onCancel()" class="text-white/60 hover:text-white transition p-1 rounded">
+        <svg
+          class="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          viewBox="0 0 24 24"
+        >
+          <path d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    <div class="h-1 bg-gradient-to-r from-kcb-green via-kcb-green/60 to-kcb-navy"></div>
+
+    <!-- Body -->
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+      <div class="px-6 py-6 grid grid-cols-2 gap-4 max-h-[65vh] overflow-y-auto">
+        <!-- Username -->
+        <div class="col-span-2">
+          <label class="form-label">Username</label>
+          <input
+            type="text"
+            formControlName="username"
+            placeholder="e.g. alice.kamau"
+            class="form-input"
+            [class.border-red-400]="fieldTouched('username')"
+          />
+          @if (fieldError('username', 'required')) {
+            <p class="form-error">Username is required</p>
+          }
+          @if (fieldError('username', 'minlength')) {
+            <p class="form-error">At least 3 characters</p>
+          }
+          @if (fieldError('username', 'pattern')) {
+            <p class="form-error">Only lowercase letters, numbers, dots, hyphens and underscores</p>
+          }
+        </div>
+
+        <!-- First Name -->
+        <div>
+          <label class="form-label">First Name</label>
+          <input
+            type="text"
+            formControlName="firstName"
+            placeholder="e.g. Alice"
+            class="form-input"
+            [class.border-red-400]="fieldTouched('firstName')"
+          />
+          @if (fieldError('firstName', 'required')) {
+            <p class="form-error">First name is required</p>
+          }
+          @if (fieldError('firstName', 'minlength')) {
+            <p class="form-error">At least 2 characters</p>
+          }
+        </div>
+
+        <!-- Last Name -->
+        <div>
+          <label class="form-label">Last Name</label>
+          <input
+            type="text"
+            formControlName="lastName"
+            placeholder="e.g. Kamau"
+            class="form-input"
+            [class.border-red-400]="fieldTouched('lastName')"
+          />
+          @if (fieldError('lastName', 'required')) {
+            <p class="form-error">Last name is required</p>
+          }
+          @if (fieldError('lastName', 'minlength')) {
+            <p class="form-error">At least 2 characters</p>
+          }
+        </div>
+
+        <!-- Email -->
+        <div class="col-span-2">
+          <label class="form-label">Email Address</label>
+          <input
+            type="email"
+            formControlName="email"
+            placeholder="e.g. user@kcbgroup.com"
+            class="form-input"
+            [class.border-red-400]="fieldTouched('email')"
+          />
+          @if (fieldError('email', 'required')) {
+            <p class="form-error">Email is required</p>
+          }
+          @if (fieldError('email', 'email')) {
+            <p class="form-error">Enter a valid email address</p>
+          }
+          @if (fieldError('email', 'duplicate')) {
+            <p class="form-error">{{ form.get('email')!.getError('duplicate') }}</p>
+          }
+        </div>
+
+        <!-- Phone -->
+        <div class="col-span-2">
+          <label class="form-label">Phone Number</label>
+          <input
+            type="tel"
+            formControlName="phone"
+            placeholder="+254712345678"
+            class="form-input"
+            [class.border-red-400]="fieldTouched('phone')"
+          />
+          @if (fieldError('phone', 'required')) {
+            <p class="form-error">Phone number is required</p>
+          }
+          @if (fieldError('phone', 'pattern')) {
+            <p class="form-error">Use format: +254XXXXXXXXX (Kenyan number)</p>
+          }
+          @if (fieldError('phone', 'duplicate')) {
+            <p class="form-error">{{ form.get('phone')!.getError('duplicate') }}</p>
+          }
+        </div>
+
+        <!-- Role -->
+        <div>
+          <label class="form-label">Role</label>
+          <select
+            formControlName="role"
+            class="form-input"
+            [class.border-red-400]="fieldTouched('role')"
+          >
+            @for (role of roles; track role) {
+              <option [value]="role">{{ role }}</option>
+            }
+          </select>
+        </div>
+
+        <!-- Status -->
+        <div>
+          <label class="form-label">Status</label>
+          <select
+            formControlName="status"
+            class="form-input"
+            [class.border-red-400]="fieldTouched('status')"
+          >
+            @for (status of statuses; track status) {
+              <option [value]="status">{{ status }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div
+        class="px-6 py-4 bg-gray-50 border-t border-gray-100 flex items-center justify-end gap-3"
+      >
+        <button
+          type="button"
+          (click)="onCancel()"
+          class="px-5 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          class="px-5 py-2.5 text-sm font-bold text-white bg-kcb-green hover:bg-kcb-green-dark rounded-lg transition flex items-center gap-2 shadow-sm"
+        >
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            viewBox="0 0 24 24"
+          >
+            <path d="M5 13l4 4L19 7" />
+          </svg>
+          {{ isEdit ? 'Save Changes' : 'Create User' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,108 @@
+@import 'tailwindcss';
+
+/* Base font */
+html,
+body {
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ─── KCB Brand Theme ──────────────────────────────────────────────────────── */
+@theme {
+  --color-kcb-green: #7cc142;
+  --color-kcb-green-dark: #5fa332;
+  --color-kcb-green-light: #a8d884;
+  --color-kcb-navy: #002c4d;
+  --color-kcb-navy-light: #004070;
+  --color-kcb-navy-dark: #001a30;
+}
+
+/* ─── Animations ────────────────────────────────────────────────────────────── */
+@keyframes toast-slide-in {
+  from {
+    transform: translateX(calc(100% + 1rem));
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes modal-scale-in {
+  from {
+    transform: scale(0.93);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.toast-enter {
+  animation: toast-slide-in 0.3s cubic-bezier(0.21, 1.02, 0.73, 1) forwards;
+}
+
+.animate-modal-in {
+  animation: modal-scale-in 0.2s ease-out forwards;
+}
+
+/* ─── Reusable component helpers ────────────────────────────────────────────── */
+
+/* Stat card */
+.stat-card {
+  @apply flex items-center gap-3 bg-white rounded-xl border border-gray-200 shadow-sm px-4 py-4;
+}
+.stat-icon {
+  @apply w-11 h-11 rounded-xl flex items-center justify-center shrink-0;
+}
+
+/* Badges */
+.badge {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold;
+}
+.badge-green {
+  @apply bg-green-100 text-green-700;
+}
+.badge-red {
+  @apply bg-red-100 text-red-700;
+}
+.badge-navy {
+  @apply bg-kcb-navy/10 text-kcb-navy;
+}
+.badge-blue {
+  @apply bg-blue-100 text-blue-700;
+}
+.badge-gray {
+  @apply bg-gray-100 text-gray-600;
+}
+
+/* Form helpers */
+.form-label {
+  @apply block text-sm font-semibold text-gray-700 mb-1.5;
+}
+.form-input {
+  @apply w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm
+         focus:outline-none focus:ring-2 focus:ring-kcb-green focus:border-transparent
+         transition bg-white;
+}
+.form-error {
+  @apply mt-1.5 text-xs text-red-500;
+}
+
+/* Scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #7cc142 #f1f5f9;
+}
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+*::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+*::-webkit-scrollbar-thumb {
+  background: #7cc142;
+  border-radius: 3px;
+}
