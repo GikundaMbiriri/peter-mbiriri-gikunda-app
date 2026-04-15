@@ -7,7 +7,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "kcb-angular-test": {
+    "peter-mbiriri-gikunda-app": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -61,10 +61,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "kcb-angular-test:build:production"
+              "buildTarget": "peter-mbiriri-gikunda-app:build:production"
             },
             "development": {
-              "buildTarget": "kcb-angular-test:build:development"
+              "buildTarget": "peter-mbiriri-gikunda-app:build:development"
             }
           },
           "defaultConfiguration": "development"

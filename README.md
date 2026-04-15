@@ -1,4 +1,4 @@
-# KCB Angular Test — User Management System
+# peter-mbiriri-gikunda-app — KCB User Management System
 
 **Author:** Peter Mbiriri Gikunda
 
